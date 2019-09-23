@@ -3,8 +3,6 @@ import { useState, useMemo } from 'react'
 import axios from 'axios';
 const url = 'http://localhost:3000/api';
 
-let dataRequest = axios.create({ url, withCredentials: true });
-
 let signup = (data) => {
   return axios.post(`${url}/signup` , data)
 }

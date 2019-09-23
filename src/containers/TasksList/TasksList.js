@@ -36,10 +36,10 @@ const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
-    width: "100%",
+    width: "100%"
   },
   body: {
-    fontSize: 14,
+    fontSize: 14
   }
 }))(TableCell);
 
@@ -81,89 +81,85 @@ const TasksList = () => {
 
   useEffect(() => {
     fetchData();
-  });
+  },[]);
 
   // function createData(task, done) {
   //   return { task, done };
   // }
-
   let rows =
     tasks.length > 1 ? (
       tasks.map(task => {
         const labelId = `checkbox-list-secondary-label-${task}`;
         return (
           <StyledTableRow key={task._id}>
-            <ListItem button style={{display: "flex", justifyContent: "spaceAround" }}>
+            <ListItem button>
               <div>
-
-              <StyledTableCell align="right">
-                <ListItemIcon>
-                  <AssignmentTurnedInIcon />
-                </ListItemIcon>
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <ListItemText
-                  id={labelId}
-                  primary={task.title}
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}
-                        color="textPrimary"
-                      >
-                        {task.description}
-                      </Typography>
-                      {}
-                    </React.Fragment>
-                  }
-                />
-              </StyledTableCell>
-              </div>
-              {/* <div> */}
-
-              <StyledTableCell align="right">
-                <ListItemSecondaryAction>
-                  <Checkbox
-                    // edge="end"
-                    onChange={handleToggle(task)}
-                    checked={checked.indexOf(task) !== -1}
-                    inputProps={{ "aria-labelledby": labelId }}
+                <StyledTableCell align="right">
+                  <ListItemIcon>
+                    <AssignmentTurnedInIcon />
+                  </ListItemIcon>
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  <ListItemText
+                    id={labelId}
+                    primary={task.title}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          className={classes.inline}
+                          color="textPrimary"
+                        >
+                          {task.description}
+                        </Typography>
+                        {}
+                      </React.Fragment>
+                    }
                   />
+                </StyledTableCell>
 
-                  <IconButton aria-label="delete">
-                    <EditIcon />
-                  </IconButton>
+                <StyledTableCell align="right">
+                  <ListItemSecondaryAction>
+                    <Checkbox
+                      // edge="end"
+                      onChange={handleToggle(task)}
+                      checked={checked.indexOf(task) !== -1}
+                      inputProps={{ "aria-labelledby": labelId }}
+                    />
 
-                  <IconButton aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </StyledTableCell>
-              {/* </div> */}
+                    <IconButton aria-label="delete">
+                      <EditIcon />
+                    </IconButton>
+
+                    <IconButton aria-label="delete">
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </StyledTableCell>
+              </div>
             </ListItem>
           </StyledTableRow>
         );
       })
     ) : (
-      <StyledTableRow >Loading...</StyledTableRow>
+      <StyledTableRow>Loading...</StyledTableRow>
     );
 
   return (
-      <Paper className={classes.root}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Task (name / description)</StyledTableCell>
-              <StyledTableCell align="right">Done</StyledTableCell>
-              <StyledTableCell align="right">Edit&nbsp;</StyledTableCell>
-              <StyledTableCell align="right">Delete&nbsp;</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{rows}</TableBody>
-        </Table>
-      </Paper>
+    <Paper className={classes.root}>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Task (name / description)</StyledTableCell>
+            <StyledTableCell align="right">Done</StyledTableCell>
+            <StyledTableCell align="right">Edit&nbsp;</StyledTableCell>
+            <StyledTableCell align="right">Delete&nbsp;</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>{rows}</TableBody>
+      </Table>
+    </Paper>
   );
 };
 export default TasksList;
