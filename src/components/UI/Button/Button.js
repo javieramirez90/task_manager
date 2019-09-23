@@ -14,7 +14,7 @@ const Button = styled.a`
 
   /* The GitHub button is a primary button
    * edit this to target it specifically! */
-  ${props => props.primary && css`background: white; color: palevioletred;`}
 `
 
 export default Button;
+//  ${props => props.primary && css`background: white; color: palevioletred;`}

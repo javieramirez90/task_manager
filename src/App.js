@@ -5,8 +5,6 @@ import Footer from './components/Footer/Footer';
 
 import Router from './Router';
 
-import Home from './containers/Home/Home';
-
 function App() {
   return (
     <div className="App">
