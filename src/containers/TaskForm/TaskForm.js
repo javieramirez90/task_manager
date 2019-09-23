@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 
 import Button from '@material-ui/core/Button';
 
-const TaskForm = () => {
+const TaskForm = (props) => {
   const useStyles = makeStyles(theme => ({
     container: {
       display: 'flex',
@@ -47,10 +47,12 @@ const TaskForm = () => {
   });
 
   const handleSubmit = e => {
-    console.log("e")
-    // e.preventDefault()
+    console.log("props", props)
+    e.preventDefault()
     actions.create_task(values)
-      // props.props.history.push(`/profile`)
+    // props.fetchData()
+    props.handleClose()
+    
 
   }
 
@@ -60,6 +62,7 @@ const TaskForm = () => {
 
   return (
     <form className={classes.container} noValidate autoComplete="off" onSubmit={e => handleSubmit(e)}>
+      <h3>Create task</h3> 
       <TextField
         id="outlined-title-input"
         label="Title"

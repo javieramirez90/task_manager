@@ -61,6 +61,8 @@ const TasksList = () => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([1]);
 
+  const { state, actions } = useAppState();
+
   const handleToggle = value => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -86,15 +88,16 @@ const TasksList = () => {
   }
 
   useEffect(() => {
-    fetchData();
-  },[]);
+    actions.get_tasks()
+    // fetchData(tasks);
+  }, []);
 
   // function createData(task, done) {
   //   return { task, done };
   // }
   let rows =
-    tasks.length > 1 ? (
-      tasks.map(task => {
+    state.tasks.length > 1 ? (
+      state.tasks.map(task => {
         const labelId = `checkbox-list-secondary-label-${task}`;
         return (
           <StyledTableRow key={task._id}>
@@ -168,7 +171,7 @@ const TasksList = () => {
         <TableBody>{rows}</TableBody>
       </Table>
     </Paper>
-      <SpringModal />
+      <SpringModal fetchData={fetchData}/>
     </div>
   );
 };

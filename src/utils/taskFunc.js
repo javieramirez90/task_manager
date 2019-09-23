@@ -7,10 +7,10 @@ let create_task = (data) => {
   return axios.post(`${url}/tasks/create`, data, {withCredentials: true})
 }
 let edit_task = (data) => {
-  return axios.post(`${url}/tasks/edit/:id` , data)
+  return axios.post(`${url}/tasks/edit/:id` , data, {withCredentials: true})
 }
 let delete_task = (data) => {
-  return axios.post(`${url}/tasks/delete/:id` , data)
+  return axios.post(`${url}/tasks/delete/:id` , data , {withCredentials: true})
 }
 let get_tasks = () => {
   return axios.get(`${url}/tasks`)
@@ -41,10 +41,12 @@ const useAppState = () => {
 // functions.
 const getActions = setState => ({
   create_task: (data) =>{
+    console.log("La data", data)
     let taskData
     create_task(data)
     .then(response => {
       taskData = response.data
+      get_tasks()
       console.log("En taskState", taskData)
     })
   },
@@ -52,6 +54,13 @@ const getActions = setState => ({
     get_tasks()
     .then(response => {
       console.log(response.data)
+      setState(state => ({...state, tasks: response.data}))
+    })
+  },
+  delete_task: (id) => {
+    delete_task(id)
+    .then(response => {
+
     })
   },
   increment: () => {

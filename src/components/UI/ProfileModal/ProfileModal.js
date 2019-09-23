@@ -55,6 +55,7 @@ export default function SpringModal(props) {
   };
 
   const handleClose = () => {
+    // props.fetchData()
     setOpen(false);
   };
 
@@ -79,7 +80,7 @@ export default function SpringModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             {/* {state.create ? <TaskForm /> : <>No</>} */}
-            <TaskForm />
+            <TaskForm fetchData={props.fetchData} handleClose={handleClose}/>
           </div>
         </Fade>
       </Modal>

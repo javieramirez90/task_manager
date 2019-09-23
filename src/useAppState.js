@@ -4,10 +4,10 @@ import axios from 'axios';
 const url = 'http://localhost:3000/api';
 
 let signup = (data) => {
-  return axios.post(`${url}/signup` , data)
+  return axios.post(`${url}/signup` , data, {withCredentials: true})
 }
 let login = (data) => {
-  return axios.post(`${url}/login` , data)
+  return axios.post(`${url}/login` , data, {withCredentials: true})
 }
 let logout = () => {
   return axios.post(`${url}/logout`)
