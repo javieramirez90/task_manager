@@ -14,7 +14,7 @@ const Profile = () => {
 
   return (
     <div>
-      <TasksList style={{width: "70%"}}/>
+      <TasksList />
     </div>
   );
 }

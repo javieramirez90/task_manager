@@ -2,19 +2,39 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Button = styled.a`
-  /* This renders the buttons above... Edit me! */
+@media only screen and (max-width: 500px) {
   display: inline-block;
   border-radius: 3px;
   padding: 0.5rem 0;
   margin: 0.5rem 1rem;
-  width: 11rem;
+  width: 8rem;
   background: transparent;
-  color: white;
-  border: 2px solid white;
+  color: #01b4fe;
+  border: 2px solid #01b4fe;
+  cursor: pointer;
+  font-family:'Oswald', sans-serif;
+  font-size: 1.5rem; 
+}
+@media only screen and (min-width: 961px) {
+  display: inline-block;
+  border-radius: 3px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+  width: 10rem;
+  background: transparent;
+  color: #01b4fe;
+  border: 2px solid #01b4fe;
+  cursor: pointer;
+  font-family:'Oswald', sans-serif;
+  font-size: 1.8rem;
+}
+  :hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(0,0,0, 0.2); }
+  :hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0.3; }
 
-  /* The GitHub button is a primary button
-   * edit this to target it specifically! */
 `
 
 export default Button;
-//  ${props => props.primary && css`background: white; color: palevioletred;`}

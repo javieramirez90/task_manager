@@ -1,3 +1,5 @@
+import useAppState from '../../utils/taskFunc';
+
 import React, { useState, useEffect } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -19,9 +21,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
+import SpringModal from '../../components/UI/ProfileModal/ProfileModal';
+
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "80%",
+    width: "75%",
     // maxWidth: ,
     backgroundColor: theme.palette.background.paper,
     marginTop: theme.spacing(3),
@@ -29,14 +33,16 @@ const useStyles = makeStyles(theme => ({
   },
   table: {
     width: "100%"
-  }
+  }, fab: {
+    margin: theme.spacing(1),
+  },
 }));
 
 const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
-    width: "100%"
+    width: "80%"
   },
   body: {
     fontSize: 14
@@ -147,6 +153,8 @@ const TasksList = () => {
     );
 
   return (
+    <div style={{display: "flex", flexWrap: 'wrap' , justifyContent: "center"}}>
+
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
@@ -160,6 +168,8 @@ const TasksList = () => {
         <TableBody>{rows}</TableBody>
       </Table>
     </Paper>
+      <SpringModal />
+    </div>
   );
 };
 export default TasksList;

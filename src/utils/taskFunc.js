@@ -4,7 +4,7 @@ import axios from 'axios';
 const url = 'http://localhost:3000/api';
 
 let create_task = (data) => {
-  return axios.post(`${url}/tasks/create` , data)
+  return axios.post(`${url}/tasks/create`, data, {withCredentials: true})
 }
 let edit_task = (data) => {
   return axios.post(`${url}/tasks/edit/:id` , data)

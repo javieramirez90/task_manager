@@ -3,8 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { useSpring, animated } from 'react-spring';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import FullWidthTabs from '../Tabs/Tabs';
-import Button from '../Button/Button'
+import TaskForm from '../../../containers/TaskForm/TaskForm'
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -58,9 +60,10 @@ export default function SpringModal(props) {
 
   return (
     <div>
-      <Button type="button" onClick={handleOpen}>
-        LOGIN
-      </Button>
+
+<Fab color="primary" aria-label="add" className={classes.fab} onClick={handleOpen}>
+        <AddIcon />
+      </Fab>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -75,7 +78,8 @@ export default function SpringModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <FullWidthTabs props={props.props}/>
+            {/* {state.create ? <TaskForm /> : <>No</>} */}
+            <TaskForm />
           </div>
         </Fade>
       </Modal>
