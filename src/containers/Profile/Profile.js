@@ -3,6 +3,7 @@ import useAppState from '../../utils/taskFunc';
 import React from 'react';
 import TasksList from '../TasksList/TasksList';
 
+
 const Profile = () => {
 
   const { state, actions } = useAppState();
@@ -13,8 +14,7 @@ const Profile = () => {
 
   return (
     <div>
-      Andas en tu Perfil
-      <TasksList />
+      <TasksList style={{width: "70%"}}/>
     </div>
   );
 }

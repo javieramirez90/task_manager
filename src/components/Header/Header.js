@@ -1,10 +1,11 @@
 import React from 'react';
+import SpringModal from '../UI/Modal/Modal'
 
-const Header = () => {
+const Header = (props) => {
   return (
     <div>
       <h3>Logo</h3>
-      <button>Signin</button>
+      <SpringModal props={props}/>
     </div>
   );
 }
