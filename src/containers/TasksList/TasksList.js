@@ -1,8 +1,7 @@
-import useAppState from '../../utils/taskFunc';
+import useAppState from "../../utils/taskFunc";
 
 import React, { useState, useEffect } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
@@ -21,7 +20,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import SpringModal from '../../components/UI/ProfileModal/ProfileModal';
+import SpringModal from "../../components/UI/ProfileModal/ProfileModal";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,13 +28,14 @@ const useStyles = makeStyles(theme => ({
     // maxWidth: ,
     backgroundColor: theme.palette.background.paper,
     marginTop: theme.spacing(3),
-    overflowX: "auto"
+    // overflowX: "auto"
   },
   table: {
     width: "100%"
-  }, fab: {
-    margin: theme.spacing(1),
   },
+  fab: {
+    margin: theme.spacing(1)
+  }
 }));
 
 const StyledTableCell = withStyles(theme => ({
@@ -64,6 +64,7 @@ const TasksList = () => {
   const { state, actions } = useAppState();
 
   const handleToggle = value => () => {
+    
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -72,7 +73,7 @@ const TasksList = () => {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
+    actions.doneyet(value)
     setChecked(newChecked);
   };
 
@@ -88,9 +89,9 @@ const TasksList = () => {
   }
 
   useEffect(() => {
-    actions.get_tasks()
+    actions.get_tasks(tasks);
     // fetchData(tasks);
-  }, []);
+  }, [tasks]);
 
   // function createData(task, done) {
   //   return { task, done };
@@ -133,15 +134,18 @@ const TasksList = () => {
                     <Checkbox
                       // edge="end"
                       onChange={handleToggle(task)}
-                      checked={checked.indexOf(task) !== -1}
+                      checked={ checked.indexOf(task) !== -1}
                       inputProps={{ "aria-labelledby": labelId }}
                     />
 
-                    <IconButton aria-label="delete">
+                    <IconButton aria-label="edit" onClick={() => SpringModal}>
                       <EditIcon />
                     </IconButton>
 
-                    <IconButton aria-label="delete">
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => actions.delete_task(task._id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
@@ -152,26 +156,27 @@ const TasksList = () => {
         );
       })
     ) : (
-      <StyledTableRow>Loading...</StyledTableRow>
+      <StyledTableRow>You don't have tasks assigned.</StyledTableRow>
     );
 
   return (
-    <div style={{display: "flex", flexWrap: 'wrap' , justifyContent: "center"}}>
-
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Task (name / description)</StyledTableCell>
-            <StyledTableCell align="right">Done</StyledTableCell>
-            <StyledTableCell align="right">Edit&nbsp;</StyledTableCell>
-            <StyledTableCell align="right">Delete&nbsp;</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{rows}</TableBody>
-      </Table>
-    </Paper>
-      <SpringModal fetchData={fetchData}/>
+    <div
+      style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+    >
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Task (name / description)</StyledTableCell>
+              <StyledTableCell align="right">Done</StyledTableCell>
+              <StyledTableCell align="right">Edit&nbsp;</StyledTableCell>
+              <StyledTableCell align="right">Delete&nbsp;</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{rows}</TableBody>
+        </Table>
+      </Paper>
+      <SpringModal fetchData={fetchData} />
     </div>
   );
 };

@@ -12,15 +12,19 @@ let login = (data) => {
 let logout = () => {
   return axios.post(`${url}/logout`)
 }
+let loggedin = () => {
+  return axios.get(`${url}/loggedin`, {withCredentials: true})
+}
 
 /**
  * Our custom React hook to manage state
  */
 
-const useAppState = () => {
+const useAppAuthState = () => {
   const initialState = {
     modalState: false,
-    user: {}
+    user: null,
+    message: ''
   }
 
   // Manage the state using React.useState()
@@ -41,27 +45,33 @@ const getActions = setState => ({
     let userData
     signup(x)
     .then(response => {
-      userData= response
+      userData= response.data
       console.log("En userAppS", userData)
-      setState(state => ({...state, user: userData}))
+      setState(state => ({...state, user: response.data}))
     })
   },
   login: (x) => {
     let userData
     login(x)
     .then(response => {
-      userData= response
+      userData= response.data
       console.log("En userAppS", userData)
-      setState(state => ({...state, user: userData}))
+      setState(state => ({...state, user: response.data}))
     })
 
   },
-  increment: () => {
-    setState(state => ({ ...state, count:  + 1 }))
+  loggedin: () => {
+    loggedin()
+    .then(response => {
+      console.log(response.data)
+    })
   },
-  decrement: () => {
-    setState(state => ({ ...state, count:  - 1 }))
+  logout: () => {
+    logout()
+    .then(response => {
+      setState(state => ({...state, message: response.data}))
+    })
   }
 })
 
-export default useAppState
+export default useAppAuthState

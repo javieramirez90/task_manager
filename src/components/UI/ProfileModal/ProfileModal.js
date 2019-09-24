@@ -1,25 +1,24 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import { useSpring, animated } from 'react-spring';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import FullWidthTabs from '../Tabs/Tabs';
-import TaskForm from '../../../containers/TaskForm/TaskForm'
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import { useSpring, animated } from "react-spring";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import TaskForm from "../../../containers/TaskForm/TaskForm";
 
 const useStyles = makeStyles(theme => ({
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
+    padding: theme.spacing(2, 4, 3)
+  }
 }));
 
 const Fade = React.forwardRef(function Fade(props, ref) {
@@ -36,7 +35,7 @@ const Fade = React.forwardRef(function Fade(props, ref) {
       if (!open && onExited) {
         onExited();
       }
-    },
+    }
   });
 
   return (
@@ -61,8 +60,12 @@ export default function SpringModal(props) {
 
   return (
     <div>
-
-<Fab color="primary" aria-label="add" className={classes.fab} onClick={handleOpen}>
+      <Fab
+        color="primary"
+        aria-label="add"
+        className={classes.fab}
+        onClick={handleOpen}
+      >
         <AddIcon />
       </Fab>
       <Modal
@@ -74,13 +77,12 @@ export default function SpringModal(props) {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500,
+          timeout: 500
         }}
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            {/* {state.create ? <TaskForm /> : <>No</>} */}
-            <TaskForm fetchData={props.fetchData} handleClose={handleClose}/>
+            <TaskForm fetchData={props.fetchData} handleClose={handleClose} />
           </div>
         </Fade>
       </Modal>

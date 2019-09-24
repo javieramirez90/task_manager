@@ -1,21 +1,35 @@
-import React from 'react';
-import './Header.css';
-import SpringModal from '../UI/Modal/Modal'
+import useAppAuthState from "../../useAppState";
 
-const Header = (props) => {
-  
+import React from "react";
+import "./Header.css";
+
+import Button from "../UI/Button/Button";
+
+const Header = props => {
+  const { state, actions } = useAppAuthState();
+
+  console.log(state);
+
   return (
     <div className="header">
       <div className="header__logo-box">
-        <img src={require("../../images/logo.png")} alt="logo ironhack" className="header__logo"/>
+        <img
+          src={require("../../images/logo.png")}
+          alt="logo ironhack"
+          className="header__logo"
+        />
       </div>
       <div className="header-btn">
-      {/* <SpringModal props={props}/> */}
+        {state.user ? (
+          <Button type="button" onClick={() => actions.logout()}>
+            LOGOUT
+          </Button>
+        ) : (
+          <></>
+        )}
       </div>
-    
-      
     </div>
   );
-}
+};
 
 export default Header;

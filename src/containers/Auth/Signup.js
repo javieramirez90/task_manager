@@ -1,4 +1,4 @@
-import useAppState from '../../useAppState';
+import useAppAuthState from '../../useAppState';
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Signup(props) {
 
-  const { state, actions } = useAppState();
+  const { state, actions } = useAppAuthState();
 
   const classes = useStyles();
 

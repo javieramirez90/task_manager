@@ -1,22 +1,23 @@
-import useAppState from '../../utils/taskFunc';
+import useAppAuthState from "../../useAppState";
 
-import React from 'react';
-import TasksList from '../TasksList/TasksList';
-
+import React from "react";
+import TasksList from "../TasksList/TasksList";
 
 const Profile = () => {
+  const { state, actions } = useAppAuthState();
 
-  const { state, actions } = useAppState();
+  console.log(state);
 
-  const getTasks = () => {
-    actions.get_tasks()
-  }
-
-  return (
-    <div>
-      <TasksList />
-    </div>
-  );
-}
+    if (actions.loggedin() == 403) {
+      return <div>You are not loggedin.</div>;
+    } else {
+      return (
+        <div>
+          <TasksList />
+        </div>
+      );
+    }
+  
+};
 
 export default Profile;
