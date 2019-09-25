@@ -89,16 +89,16 @@ const TasksList = () => {
   }
 
   useEffect(() => {
-    actions.get_tasks(tasks);
-    // fetchData(tasks);
+    // actions.get_tasks(tasks);
+    fetchData(tasks);
   }, [tasks]);
 
   // function createData(task, done) {
   //   return { task, done };
   // }
   let rows =
-    state.tasks.length > 1 ? (
-      state.tasks.map(task => {
+    tasks.length > 1 ? (
+      tasks.map(task => {
         const labelId = `checkbox-list-secondary-label-${task}`;
         return (
           <StyledTableRow key={task._id}>
