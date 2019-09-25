@@ -13,7 +13,7 @@
       <li>Profile</li>
       <li>Tasks list</li>
     </ul>
-  <i>yarn start start</i>
+  <i>yarn start</i>
   </p>
   <h3>Creditos</h3>
   <p>
